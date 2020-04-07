@@ -1,1 +1,1 @@
-# vue-mimall
+# vue-mi-mall
