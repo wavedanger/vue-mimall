@@ -1,10 +1,13 @@
 <template>
   <div>
-    nav-footer
+    pay
   </div>
 </template>
 <script>
 export default {
-  name:'nav-footer'
+  name:'pay',
+  components:{
+
+  }
 }
 </script>

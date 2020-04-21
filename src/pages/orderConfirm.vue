@@ -1,10 +1,13 @@
 <template>
   <div>
-    nav-footer
+    confirm
   </div>
 </template>
 <script>
 export default {
-  name:'nav-footer'
+  name:'confirm',
+  components:{
+
+  }
 }
 </script>

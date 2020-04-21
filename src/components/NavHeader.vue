@@ -1,6 +1,6 @@
 <template>
   <div>
-    头
+    nav-header
   </div>
 </template>
 <script>
