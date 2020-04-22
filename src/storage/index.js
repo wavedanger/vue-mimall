@@ -31,6 +31,6 @@ export default {
     window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(val))
   },
   getStorage() {
-    return JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || {})
+    return JSON.parse(window.sessionStorage.getItem(STORAGE_KEY) || '{}')
   }
 }

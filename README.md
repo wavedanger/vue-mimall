@@ -61,3 +61,9 @@ npm install
     },
     //再通过env.js中process.env.NODE_ENV更改对应baseurl
     ```
+3.  Mock设置
+    * 提高效率，减少沟通，减少接口联调时间
+    * 方案：
+      * 本地JSON
+      * easy-mock
+      * 集成Mock API

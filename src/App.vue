@@ -5,15 +5,23 @@
 </template>
 
 <script>
-import storage from './storage'
+// import storage from './storage'
 export default {
   name: 'App',
+  data(){
+    return{
+      res:{}
+    }
+  },
   components: {
   },
   mounted() {
-    storage.setItem("name","jack","user")
-    let a=storage.getItem("name","user")
-    console.log(a)
+    // let a=storage.getItem("name","user")
+    // console.log(a)
+    // 本地JSON
+    // this.axios.get("/mock/user/login.json").then(res=>console.log(res))
+    // mockjs
+    this.axios.get("/user/login").then(res=>this.res=res)
   },
 }
 </script>
