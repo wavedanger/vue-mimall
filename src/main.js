@@ -10,7 +10,7 @@ axios.defaults.timeout = 8000;
 // 根据环境变量获取不同的请求地址
 // axios.defaults.baseURL = env.baseURL;
 // mockjs数据
-const mock = true
+const mock = false
 if (mock) {
   require("./mock/api")
 }

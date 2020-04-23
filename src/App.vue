@@ -21,18 +21,11 @@ export default {
     // 本地JSON
     // this.axios.get("/mock/user/login.json").then(res=>console.log(res))
     // mockjs
-    this.axios.get("/user/login").then(res=>this.res=res)
+    // this.axios.get("/user/login").then(res=>this.res=res)
   },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "./assets/scss/reset.scss";
 </style>
