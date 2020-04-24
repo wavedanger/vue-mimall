@@ -70,3 +70,9 @@ npm install
 7.  scss
     * 重置、通用样式
     * @mixin,@include
+      * 集成Mock API
+8.  net::ERR_BLOCKED_BY_CLIENT
+    * Adblock-Plus插件拦截，显示不出广告
+    * 实质为拦截类名，文件名包含ads之类的广告字眼
+### 参考文档
+* [swiper中文网](https://www.swiper.com.cn/)
