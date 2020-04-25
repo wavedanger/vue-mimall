@@ -56,7 +56,7 @@
                   >
                     <div class="pro-img">
                       <img
-                        :src="item.mainImage"
+                        v-lazy="item.mainImage"
                         :alt="item.subtitle"
                       >
                     </div>
