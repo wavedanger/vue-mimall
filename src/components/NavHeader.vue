@@ -186,7 +186,7 @@ export default {
   name:'nav-header',
   data(){
     return {
-      username:'wave',
+      username:'',
       phoneList:[]
     }
   },
@@ -244,6 +244,7 @@ export default {
         background-color: #f60;
         text-align: center;
         color: #fff;
+        margin-right: 0px;
         .icon-cart {
           @include bgImg(16px, 12px, "/imgs/icon-cart-checked.png");
           margin-right: 4px;

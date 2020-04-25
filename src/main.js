@@ -4,8 +4,10 @@ import VueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './router'
 import VueLazyLoad from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
 // import env from './env'
 Vue.use(VueAxios, axios);
+Vue.use(VueCookie);
 Vue.use(VueLazyLoad, {
   loading: '/imgs/loading-svg/loading-bars.svg'
 })
@@ -27,6 +29,7 @@ axios.interceptors.response.use(function (response) {
     window.location.href = '/#/login';
   } else {
     console.log("error")
+    return Promise.reject(res);
   }
 });
 

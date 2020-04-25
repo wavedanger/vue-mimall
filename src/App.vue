@@ -22,6 +22,22 @@ export default {
     // this.axios.get("/mock/user/login.json").then(res=>console.log(res))
     // mockjs
     // this.axios.get("/user/login").then(res=>this.res=res)
+     if(this.$cookie.get('userId')){
+      this.getUser();
+      this.getCartCount();
+    }
+  },
+  methods: {
+    getUser(){
+      this.axios.get('/user').then(()=>{
+        
+      })
+    },
+    getCartCount(){
+      this.axios.get('/carts/products/sum').then(()=>{
+       
+      })
+    }
   },
 }
 </script>
