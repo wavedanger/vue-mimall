@@ -31,7 +31,7 @@
             href="javascript:;"
             class="my-cart"
             @click="goToCart"
-          ><span class="icon-cart"></span>购物车</a>
+          ><span class="icon-cart"></span>购物车({{cartCount}})</a>
         </div>
       </div>
     </div>
@@ -182,11 +182,11 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   name:'nav-header',
   data(){
     return {
-      username:'',
       phoneList:[]
     }
   },
@@ -195,6 +195,15 @@ export default {
       if(!val)return '0.00'
       return '￥'+val.toFixed(2)+'元'
     }
+  },
+  computed:{
+    // username(){
+    //   return this.$store.state.username
+    // },
+    // cartCount(){
+    //   return this.$store.state.cartCount
+    // }
+    ...mapState(['username','cartCount'])
   },
   mounted(){
     this.getProductList()
@@ -214,7 +223,8 @@ export default {
       this.$router.push('/login')
     },
     logout(){
-      this.username=''
+      this.$store.dispatch('saveUserName','')
+      this.$store.dispatch('saveCartCount',0)
     },
     goToCart(){
       this.$router.push('/cart')
