@@ -104,7 +104,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "./../assets/scss/base.scss";
 .login {
   & > .container {
     height: 113px;

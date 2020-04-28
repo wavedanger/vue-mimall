@@ -74,5 +74,23 @@ npm install
 8.  net::ERR_BLOCKED_BY_CLIENT
     * Adblock-Plus插件拦截，显示不出广告
     * 实质为拦截类名，文件名包含ads之类的广告字眼
+9. 组件吸顶
+    ```javascript
+    //挂载
+     mounted() {
+    window.addEventListener('scroll',this.initHeight)
+    },
+    methods: {
+      initHeight(){
+        //兼容浏览器
+        let y=window.pageYOffset||document.documentElement.offsetTop||document.body.scrollTop
+        this.isFixed=y>152?true:false
+      }
+    },
+    //销毁
+    destroyed() {
+      window.removeEventListener('scroll',this.initHeight,false)
+    },
+    ```
 ### 参考文档
 * [swiper中文网](https://www.swiper.com.cn/)
