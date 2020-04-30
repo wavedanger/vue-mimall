@@ -207,6 +207,10 @@ export default {
   },
   mounted(){
     this.getProductList()
+    let params = this.$route.params;
+    if(params && params.from == 'login'){
+      this.getCartCount();
+    }
   },
   methods:{
     getProductList(){
@@ -219,10 +223,16 @@ export default {
         this.phoneList=res.list;
       })
     },
+    getCartCount(){
+      this.axios.get('/carts/products/sum').then((res=0)=>{
+        this.$store.dispatch('saveCartCount',res);
+      })
+    },
     login(){
       this.$router.push('/login')
     },
     logout(){
+      this.$cookie.set('userId','',{expires:'-1'});
       this.$store.dispatch('saveUserName','')
       this.$store.dispatch('saveCartCount',0)
     },

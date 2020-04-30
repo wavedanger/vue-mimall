@@ -88,7 +88,12 @@ export default {
       }).then((res)=>{
         this.$cookie.set('userId',res.id,{expires:'1h'});
         this.$store.dispatch('saveUserName',res.username)
-        this.$router.push('/#/index');
+        this.$router.push({
+          name:'index',
+          params:{
+            from:'login'
+          }
+        });
       })
     },
     register(){
