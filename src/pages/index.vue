@@ -256,8 +256,14 @@ export default {
         this.phoneList=[res.list.slice(0,4),res.list.slice(4,8)]
       })
     },
-    addCart(){
-      this.showModal = true;
+    addCart(id){
+       this.axios.post('/carts',{
+        productId:id,
+        selected: true
+      }).then((res={cartTotalQuantity:0})=>{
+        this.$store.dispatch('saveCartCount',res.cartTotalQuantity);
+        this.showModal = true;
+      });
     },
     goToCart(){
         this.$router.push('/cart');

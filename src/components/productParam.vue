@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  name:"nav-bar",
+  name:"product-param",
   props:{
     title:String
   },

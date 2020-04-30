@@ -28,6 +28,7 @@ axios.interceptors.response.use(function (response) {
     return res.data;
   } else if (res.status == 10) {
     window.location.href = '/#/login';
+    return Promise.reject(res);
   } else {
     console.log("error")
     return Promise.reject(res);
