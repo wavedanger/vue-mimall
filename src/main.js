@@ -6,6 +6,8 @@ import router from './router'
 import VueLazyLoad from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
 import store from './store'
+import { Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 // import env from './env'
 Vue.use(VueAxios, axios);
 Vue.use(VueCookie);
@@ -30,11 +32,11 @@ axios.interceptors.response.use(function (response) {
     window.location.href = '/#/login';
     return Promise.reject(res);
   } else {
-    console.log("error")
+    Message.warning(res.msg);
     return Promise.reject(res);
   }
 });
-
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
 new Vue({

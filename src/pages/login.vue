@@ -86,7 +86,7 @@ export default {
         username,
         password
       }).then((res)=>{
-        this.$cookie.set('userId',res.id,{expires:'1h'});
+        this.$cookie.set('userId',res.id,{expires:'Session'});
         this.$store.dispatch('saveUserName',res.username)
         this.$router.push({
           name:'index',
@@ -102,7 +102,7 @@ export default {
         password:'wave',
         email:'wave@163.com'
       }).then(()=>{
-        alert("注册成功")
+        this.$message.success('注册成功');
       })
     }
   },

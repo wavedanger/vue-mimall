@@ -114,13 +114,13 @@ export default {
       let quantity=item.quantity,selected=item.productSelected
       if(type=='-'){
         if(quantity==1){
-          alert("至少为1")
+          this.$message.warning("至少为1")
           return
         }
         --quantity
       }else if(type=="+"){
         if(quantity>item.productStock){
-          alert("不能再多啦")
+          this.$message.warning("不能再多啦")
           return
         }
         ++quantity 
@@ -137,6 +137,7 @@ export default {
     delProduct(item){
       this.axios.delete(`/carts/${item.productId}`).then((res)=>{
         this._renderData(res)
+        this.$message.success("删除成功")
       })
     },
     order(){
@@ -144,7 +145,7 @@ export default {
       if(isCheck){
         this.$router.push('/order/confirm')
       }else{
-        alert("请选择商品")
+         this.$message.warning("请选择商品！")
       }
     },
     _renderData(res){

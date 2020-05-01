@@ -92,5 +92,31 @@ npm install
       window.removeEventListener('scroll',this.initHeight,false)
     },
     ```
+10. 按需加载和按需引入
+    * 后者会全部打包，前者会按需打包，减少包大小
+11. babel
+    * .babelrc 适用于单个软件包的配置
+    * babel.config.js 适用于编译node_modules目录下的模块
+12. 单页面数据更新问题
+    * 登录后返回首页并不会刷新，所以需再次请求数据
+    * 通过判断登录页面来源，来避免资源浪费
+    * router的query和params传参
+    * query为明文会拼接到url上，而params不会，类似于get和post
+    ```javascript
+    //query
+    this.$router.push({
+      path:'/index',
+      query:{
+        from:'login'
+      }
+    })
+    //params
+    this.$router.push({
+      name:'index',
+      params:{
+        from:'login'
+      }
+    })
+    ```
 ### 参考文档
 * [swiper中文网](https://www.swiper.com.cn/)
