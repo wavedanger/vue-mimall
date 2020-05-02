@@ -27,7 +27,7 @@ export default {
     if(path=='/order/confirm'){
       this.title='订单确认',
       this.tip='请认真填写'
-    }else if(path=='/order/pay'){
+    }else if(path.includes('/order/pay')){
       this.title='订单支付'
     }else if(path=='/order/list'){
       this.title='订单列表'
