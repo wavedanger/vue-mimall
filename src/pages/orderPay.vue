@@ -1,5 +1,10 @@
 <template>
   <div class="order-pay">
+    <order-header title="订单支付">
+      <template v-slot:tip>
+        <span>请注意支付环境</span>
+      </template>
+    </order-header>
     <div class="wrapper">
       <div class="container">
         <div class="order-wrap">
@@ -93,6 +98,7 @@
 import QRCode from 'qrcode'
 import ScanPayCode from './../components/ScanPayCode'
 import Modal from './../components/Modal'
+import OrderHeader from './../components/OrderHeader'
 export default {
   name:'pay',
   data(){
@@ -128,7 +134,7 @@ export default {
       }else{
          this.axios.post('/pay',{
           orderId:this.orderId,
-          orderName:'Vue高仿小米商城',
+          orderName:`${this.orderDetail[0].productName}等商品`,
           amount:0.01,//单位元
           payType:2 //1支付宝，2微信
         }).then((res)=>{
@@ -166,7 +172,8 @@ export default {
   },
   components:{
     ScanPayCode,
-    Modal
+    Modal,
+    OrderHeader
   }
 }
 </script>
