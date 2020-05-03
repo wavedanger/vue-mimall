@@ -69,9 +69,30 @@
         </div>
       </div>
     </div>
+    <scan-pay-code
+      v-if="showWxPay"
+      :img="wxPayUrl"
+      @close="closeWxPay"
+    ></scan-pay-code>
+    <modal
+      title="支付确认"
+      btnType="3"
+      sureText="已支付"
+      cancelText="未支付"
+      :showModal="showPayModal"
+      @cancel="showPayModal=false"
+      @submit="goOrderList"
+    >
+      <template v-slot:body>
+        <p>是否已经完成支付？</p>
+      </template>
+    </modal>
   </div>
 </template>
 <script>
+import QRCode from 'qrcode'
+import ScanPayCode from './../components/ScanPayCode'
+import Modal from './../components/Modal'
 export default {
   name:'pay',
   data(){
@@ -81,7 +102,11 @@ export default {
       orderId:this.$route.query.orderNo,
       showDetail:false,//是否显示订单详情
       payment:0,//订单总金额
-      payType:''
+      payType:'',
+      showWxPay:false,
+      wxPayUrl:'',
+      showPayModal:false,
+      timer:''//定时器
     }
   },
   mounted() {
@@ -100,11 +125,48 @@ export default {
       this.payType=payType
       if(payType==1){
          window.open('/#/order/alipay?orderId='+this.orderId,'_blank');
+      }else{
+         this.axios.post('/pay',{
+          orderId:this.orderId,
+          orderName:'Vue高仿小米商城',
+          amount:0.01,//单位元
+          payType:2 //1支付宝，2微信
+        }).then((res)=>{
+          QRCode.toDataURL(res.content)
+          .then(url => {
+            this.wxPayUrl=url
+            this.showWxPay=true
+            this.loopOrderState()
+          })
+          .catch(() => {
+            this.$message.error("生成二维码失败，请稍后再试")
+          })
+        })
       }
+    },
+    closeWxPay(){
+      this.showWxPay=false
+      this.showPayModal=true
+      clearInterval(this.timer);
+    },
+    //轮循订单状态
+    loopOrderState(){
+      this.timer=setInterval(() => {
+        this.axios.get(`/orders/${this.orderId}`).then((res)=>{
+          if(res.status == 20){
+            clearInterval(this.timer);
+            this.goOrderList();
+          }
+        })
+      }, 1000);
+    },
+    goOrderList(){
+      this.$router.push('/order/list')
     }
   },
   components:{
-
+    ScanPayCode,
+    Modal
   }
 }
 </script>

@@ -118,5 +118,9 @@ npm install
       }
     })
     ```
+13. 支付
+    * 支付宝：接口返回form表单，通过document.form[0].submit()提交名单来跳转到支付宝支付界面
+    * 微信：接口返回二维码字符串，使用qrcode转化成base64图片，再展示为二维码
+    * 微信支付状态轮循：二维码生成后，setInterval后端订单接口判断是否支付成功，从而跳转到订单列表，网络或者关闭二维码等问题则进行二次弹框进行确认，支付完成可在axios.interceptors.response.use配置拦截
 ### 参考文档
 * [swiper中文网](https://www.swiper.com.cn/)
