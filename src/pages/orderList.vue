@@ -66,17 +66,22 @@
             </div>
           </div>
         </div>
+        <Loading v-if="loading"></Loading>
+        <no-data v-if="!loading && list.length==0"></no-data>
       </div>
     </div>
   </div>
 </template>
 <script>
 import OrderHeader from './../components/OrderHeader'
+import Loading from './../components/Loading'
+import NoData from './../components/NoData'
 export default {
   name:'list',
   data(){
     return{
-      list:[]
+      list:[],
+      loading:true
     }
   },
   mounted() {
@@ -86,6 +91,9 @@ export default {
     getOrderList(){
       this.axios.get('/orders').then((res)=>{
         this.list=res.list
+        this.loading=false
+      }).catch(()=>{
+        this.loading=false
       })
     },
     goPay(orderNo){
@@ -98,7 +106,9 @@ export default {
     }
   },
   components:{
-    OrderHeader
+    OrderHeader,
+    Loading,
+    NoData
   }
 }
 </script>
