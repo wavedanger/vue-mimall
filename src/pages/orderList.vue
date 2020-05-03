@@ -7,6 +7,7 @@
     </order-header>
     <div class="wrapper">
       <div class="container">
+        <Loading v-if="loading"></Loading>
         <div class="order-box">
           <div
             class="order"
@@ -65,8 +66,28 @@
               </div>
             </div>
           </div>
+          <el-pagination
+            class="pagination"
+            v-if="list.length>0"
+            background
+            layout="prev, pager, next"
+            :total="total"
+            :pageSize="pageSize"
+            @current-change="handleChange"
+          >
+          </el-pagination>
+          <div
+            class="load-more"
+            v-if="list.length>0&&false"
+          >
+            <el-button
+              :disabled="list.length>=total"
+              type="primary"
+              :loading="loading"
+              @click="loadmore"
+            >{{list.length>=total?"暂无更多":"加载更多"}}</el-button>
+          </div>
         </div>
-        <Loading v-if="loading"></Loading>
         <no-data v-if="!loading && list.length==0"></no-data>
       </div>
     </div>
@@ -76,12 +97,16 @@
 import OrderHeader from './../components/OrderHeader'
 import Loading from './../components/Loading'
 import NoData from './../components/NoData'
+import { Pagination,Button } from 'element-ui';
 export default {
   name:'list',
   data(){
     return{
       list:[],
-      loading:true
+      loading:false,
+      pageNum:1,
+      pageSize:10,
+      total:0
     }
   },
   mounted() {
@@ -89,8 +114,18 @@ export default {
   },
   methods: {
     getOrderList(){
-      this.axios.get('/orders').then((res)=>{
+      this.loading=true
+      this.axios.get('/orders',{
+        params:{
+           pageSize:10,
+          pageNum:this.pageNum
+        }
+      }).then((res)=>{
+        //分页器
         this.list=res.list
+        // 加载按钮
+        // this.list=this.list.concat(res.list)
+        this.total=res.total
         this.loading=false
       }).catch(()=>{
         this.loading=false
@@ -103,12 +138,24 @@ export default {
           orderNo
         }
       })
+    },
+    // 第一种分布器
+    handleChange(pageNum){
+      this.pageNum=pageNum
+      this.getOrderList()
+    },
+    //第二种加载按钮
+    loadmore(){
+      this.pageNum++
+      this.getOrderList()
     }
   },
   components:{
     OrderHeader,
     Loading,
-    NoData
+    NoData,
+    [Pagination.name]:Pagination,
+    [Button.name]:Button
   }
 }
 </script>
