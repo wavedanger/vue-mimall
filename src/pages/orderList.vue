@@ -96,7 +96,7 @@
             <img
               src="/imgs/loading-svg/loading-spinning-bubbles.svg"
               alt=""
-              v-show="loading"
+              v-show="loading && list.length>0"
             >
           </div>
         </div>
