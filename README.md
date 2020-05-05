@@ -126,5 +126,26 @@ npm install
     * 分页器
     * 加载更多按钮
     * 滚动加载
+15. 性能优化
+    * 路由懒加载
+    ```javascript
+    //第一种
+    {
+      path: '/login',
+      name: 'login',
+      component: resolve => require(['./pages/login.vue'], resolve)
+    }
+    //第二种 为es7语法，可能需要安装syntax-dynamic-import插件
+    () => import('./pages/login.vue'),
+    //默认会预加载js，但有些浏览器不支持，可以在vue.config.js中配置，禁用预加载
+    chainWebpack: (config) => {
+      config.plugins.delete('prefetch');
+    }
+    ```
+    * [图片压缩](https://tinypng.com/)
+    * [七牛云-加速服务器](https://www.qiniu.com/)
+    * CDN  
 ### 参考文档
 * [swiper中文网](https://www.swiper.com.cn/)
+* [npmjs](https://www.npmjs.com/)
+* [vue-cli](https://cli.vuejs.org/zh/config/#vue-config-js)
