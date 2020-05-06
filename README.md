@@ -145,6 +145,54 @@ npm install
     * [图片压缩](https://tinypng.com/)
     * [七牛云-加速服务器](https://www.qiniu.com/)
     * CDN  
+16. 项目部署
+    * nginx安装和配置
+      * 登录服务器(腾讯云服务器可以直接可视化登录，以下路径以腾讯云路径为例，系统为centOS)
+        ```
+        <!-- 第一种 -->
+        ssh root@49.234.15.213+服务器密码
+        <!-- 第二种 -->
+        密钥对
+        ```
+      * 常用命令
+        * ls 展开文件
+        * cd 进入文件目录 cd.. 返回上一级
+        * which 查看文件安装路径
+        * cat 查看文件
+        * vi 修改文件 按i进入编辑 enter或esc加wq退出保存,q!为不保存
+        * cp index.html /workspace/index.html克隆前者到后者
+      * 安装nginx
+        * yum install nginx 
+        * which nginx查看安装路径（/usr/sbin/nginx）
+        * nginx -t查看配置文件（/etc/nginx/nginx.conf）
+        * cd /etc/nginx/进入目录
+        * cat nginx.conf进入文件
+          ```
+          server {
+                      listen       80 default_server;
+                      listen       [::]:80 default_server;
+                      server_name  _;
+                      root         /usr/share/nginx/html;
+
+                      # Load configuration files for the default server block.
+                      include /etc/nginx/default.d/*.conf;
+
+                      location / {
+                      }
+
+                      error_page 404 /404.html;
+                          location = /40x.html {
+                      }
+
+                      error_page 500 502 503 504 /50x.html;
+                          location = /50x.html {
+                      }
+                  }
+          ``` 
+        * nginx -s stop 停止服务
+        * nginx -s reload 重启服务
+        * nginx 启动服务
+    * node.js安装和配置  
 ### 参考文档
 * [swiper中文网](https://www.swiper.com.cn/)
 * [npmjs](https://www.npmjs.com/)
