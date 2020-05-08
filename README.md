@@ -2,7 +2,11 @@
 
 ## Project setup
 ```
-npm install
+git clone git@github.com:wavedanger/vue-mimall.git
+cd vue-mimall
+npm install //安装依赖
+npm run serve //服务端运行 访问 http://localhost:8080
+npm run build //项目打包
 ```
 
 ## 学习记录
@@ -192,6 +196,37 @@ npm install
         * nginx -s stop 停止服务
         * nginx -s reload 重启服务
         * nginx 启动服务
+      * 设置二级域名
+        * 通过include在nginx.conf引入配置
+          ```
+          include /etc/nginx/vhost/*.conf
+          ```
+        * 编写配置mi.weibinhong.conf
+          ```
+          server {
+                    listen 80;
+                    server_name mi.weibinhong.com;
+                          root /workspace;
+                          index index.html index.htm login.html;
+                          location ^~/api/ {
+                            proxy_pass http://mall-pre.springboot.cn/;
+                          }
+                    location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+                    {
+                      root /workspace;
+                    }
+
+                    location ~ .*\.(js|html|css)?$
+                    {
+                      root /workspace;
+                      expires 30d;
+                    }
+                  }
+          ```
+        * 搭建FTP
+          * 安装vsftpd (yum install -y vsftpd)
+          * 配置
+          * 下载FileZilla远程连接服务器，上传打包后的文件，即可访问
     * node.js安装和配置  
 ### 参考文档
 * [swiper中文网](https://www.swiper.com.cn/)
